@@ -3,15 +3,6 @@
 
     <item
         is-multidex="true"
-        jar="C:\Users\Nicholas Liu\Documents\GitHub\FTC2016-17CV\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\25.0.1\jars\classes.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="25.0.0"
-        sha1="f7ac4b327fdb9e2ee386f5adc46164927658de4b">
-        <dex dex="C:\Users\Nicholas Liu\Documents\GitHub\FTC2016-17CV\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support-appcompat-v7-25.0.1_c257bed97e8a5a28aeec69e05f1b54d572cfda18\classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
         jar="C:\Users\Nicholas Liu\Documents\GitHub\FTC2016-17CV\app\build\intermediates\exploded-aar\com.android.support\support-fragment\25.0.1\jars\classes.jar"
         jumboMode="true"
         optimize="true"
@@ -21,12 +12,21 @@
     </item>
     <item
         is-multidex="true"
-        jar="C:\Users\Nicholas Liu\Documents\GitHub\FTC2016-17CV\app\build\intermediates\exploded-aar\com.android.support\support-vector-drawable\25.0.1\jars\classes.jar"
+        jar="C:\Users\Nicholas Liu\Documents\GitHub\FTC_2016-17_CV\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\25.0.1\jars\classes.jar"
         jumboMode="true"
         optimize="true"
         revision="25.0.0"
-        sha1="b24e1c688744078e1fa833ffadf696794761bbe5">
-        <dex dex="C:\Users\Nicholas Liu\Documents\GitHub\FTC2016-17CV\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support-support-vector-drawable-25.0.1_8c5ef9988b9a60f72de20b20d6b612f72b35d7f8\classes.dex" />
+        sha1="f7ac4b327fdb9e2ee386f5adc46164927658de4b">
+        <dex dex="C:\Users\Nicholas Liu\Documents\GitHub\FTC_2016-17_CV\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support-appcompat-v7-25.0.1_eeff53f392f360367deaa7f8078c6e8871a525cd\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\Nicholas Liu\Documents\GitHub\FTC_2016-17_CV\app\build\intermediates\incremental-classes\debug\instant-run-bootstrap.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.0"
+        sha1="1f3ddf88e7d598a970254218de8866bf7ef5f04f">
+        <dex dex="C:\Users\Nicholas Liu\Documents\GitHub\FTC_2016-17_CV\app\build\intermediates\transforms\dex\debug\folders\1000\10\instant-run-bootstrap_205d2b0e63a413b072cf0bd0506b90905d4c3cd8\classes.dex" />
     </item>
     <item
         is-multidex="true"
@@ -45,6 +45,168 @@
         revision="25.0.0"
         sha1="d7c42c80f6509b9ea4db28ca7859ffae08ec5741">
         <dex dex="C:\Users\Nicholas Liu\Documents\GitHub\FTC2016-17CV\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support-support-v4-25.0.1_bd058d9e44fd5447296d299a471062465b728e7e\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\Nicholas Liu\Documents\GitHub\FTC_2016-17_CV\app\build\intermediates\exploded-aar\com.android.support\support-core-utils\25.0.1\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.0"
+        sha1="00d4c8eebf2b681073c72a26bd0849549e51c7cb">
+        <dex dex="C:\Users\Nicholas Liu\Documents\GitHub\FTC_2016-17_CV\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support-support-core-utils-25.0.1_ffe6dcfdf2d97a937cfcb54776469c0b08b8cdd7\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\Nicholas Liu\Documents\GitHub\FTC2016-17CV\app\build\intermediates\exploded-aar\com.android.support\support-fragment\25.0.1\jars\libs\internal_impl-25.0.1.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.0"
+        sha1="c0bd6ffb002a85b5e7cad29f8558d1cc59539679">
+        <dex dex="C:\Users\Nicholas Liu\Documents\GitHub\FTC2016-17CV\app\build\intermediates\transforms\dex\debug\folders\1000\10\internal_impl-25.0.1_3f962a1729a1c3ae1864176aa183bc9d47c577cc\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\Nicholas Liu\Documents\GitHub\FTC_2016-17_CV\app\build\intermediates\exploded-aar\com.android.support\support-fragment\25.0.1\jars\libs\internal_impl-25.0.1.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.0"
+        sha1="c0bd6ffb002a85b5e7cad29f8558d1cc59539679">
+        <dex dex="C:\Users\Nicholas Liu\Documents\GitHub\FTC_2016-17_CV\app\build\intermediates\transforms\dex\debug\folders\1000\10\internal_impl-25.0.1_b1b92a916b4e747c6803bc19b26a7de9a47238f2\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\Nicholas Liu\Documents\GitHub\FTC_2016-17_CV\app\build\intermediates\exploded-aar\com.android.support\support-compat\25.0.1\jars\libs\internal_impl-25.0.1.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.0"
+        sha1="3af8cc51ef7088e56f132780da8c0bd858b6a6ad">
+        <dex dex="C:\Users\Nicholas Liu\Documents\GitHub\FTC_2016-17_CV\app\build\intermediates\transforms\dex\debug\folders\1000\10\internal_impl-25.0.1_a5e097b5900d2d075e972f293402b71d2a1c3d91\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\Nicholas Liu\Documents\GitHub\FTC2016-17CV\app\build\intermediates\exploded-aar\com.android.support\support-core-ui\25.0.1\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.0"
+        sha1="bc7e99e8d0fc279a05aa91378530f467ad62d443">
+        <dex dex="C:\Users\Nicholas Liu\Documents\GitHub\FTC2016-17CV\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support-support-core-ui-25.0.1_c27b6e46bf04a2c9c4be3f09d8158765bc22e84c\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\Nicholas Liu\Documents\GitHub\FTC2016-17CV\app\build\intermediates\exploded-aar\com.android.support\support-compat\25.0.1\jars\libs\internal_impl-25.0.1.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.0"
+        sha1="3af8cc51ef7088e56f132780da8c0bd858b6a6ad">
+        <dex dex="C:\Users\Nicholas Liu\Documents\GitHub\FTC2016-17CV\app\build\intermediates\transforms\dex\debug\folders\1000\10\internal_impl-25.0.1_4585e2c113fff598178a43d2217ef5e16871a70b\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\Nicholas Liu\Documents\GitHub\FTC_2016-17_CV\app\build\intermediates\incremental-runtime-classes\debug\instant-run.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.0"
+        sha1="7d93259793237a484811c1fbda7c52501d7c70eb">
+        <dex dex="C:\Users\Nicholas Liu\Documents\GitHub\FTC_2016-17_CV\app\build\intermediates\transforms\dex\debug\folders\1000\10\instant-run_d4fa519e8178227e4ed724d4d1833dc71635a98a\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\Nicholas Liu\Documents\GitHub\FTC_2016-17_CV\app\build\intermediates\exploded-aar\com.android.support\support-core-utils\25.0.1\jars\libs\internal_impl-25.0.1.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.0"
+        sha1="c5b7145fb34779b6639147b8f2f8dd77c0db771b">
+        <dex dex="C:\Users\Nicholas Liu\Documents\GitHub\FTC_2016-17_CV\app\build\intermediates\transforms\dex\debug\folders\1000\10\internal_impl-25.0.1_af787497a8347d653fc4697d861494864b6da454\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\Nicholas Liu\Documents\GitHub\FTC2016-17CV\app\build\intermediates\exploded-aar\com.android.support\support-core-ui\25.0.1\jars\libs\internal_impl-25.0.1.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.0"
+        sha1="e5343c9d19cb19ff55f6b268c7f3fe8c9d224f6f">
+        <dex dex="C:\Users\Nicholas Liu\Documents\GitHub\FTC2016-17CV\app\build\intermediates\transforms\dex\debug\folders\1000\10\internal_impl-25.0.1_96e798542722f682d95d155b5e81cc9df2f34f46\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\Nicholas Liu\Documents\GitHub\FTC2016-17CV\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\25.0.1\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.0"
+        sha1="f7ac4b327fdb9e2ee386f5adc46164927658de4b">
+        <dex dex="C:\Users\Nicholas Liu\Documents\GitHub\FTC2016-17CV\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support-appcompat-v7-25.0.1_c257bed97e8a5a28aeec69e05f1b54d572cfda18\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\Nicholas Liu\Documents\GitHub\FTC2016-17CV\app\build\intermediates\exploded-aar\com.android.support\support-vector-drawable\25.0.1\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.0"
+        sha1="b24e1c688744078e1fa833ffadf696794761bbe5">
+        <dex dex="C:\Users\Nicholas Liu\Documents\GitHub\FTC2016-17CV\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support-support-vector-drawable-25.0.1_8c5ef9988b9a60f72de20b20d6b612f72b35d7f8\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\Nicholas Liu\Documents\GitHub\FTC_2016-17_CV\app\build\intermediates\exploded-aar\com.android.support\support-v4\25.0.1\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.0"
+        sha1="d7c42c80f6509b9ea4db28ca7859ffae08ec5741">
+        <dex dex="C:\Users\Nicholas Liu\Documents\GitHub\FTC_2016-17_CV\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support-support-v4-25.0.1_ae1e0b39f14250cdbb32b5ba2fdec1d304c00bb7\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\Nicholas Liu\Documents\GitHub\FTC_2016-17_CV\app\build\intermediates\exploded-aar\com.android.support\animated-vector-drawable\25.0.1\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.0"
+        sha1="772bed2d992b67b9d0327f766cc95cd63031dcd3">
+        <dex dex="C:\Users\Nicholas Liu\Documents\GitHub\FTC_2016-17_CV\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support-animated-vector-drawable-25.0.1_25774543360a7c315114cc534002c30189026d4b\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\Nicholas Liu\Documents\GitHub\FTC_2016-17_CV\app\build\intermediates\exploded-aar\com.android.support\support-compat\25.0.1\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.0"
+        sha1="51eba4a4dd73044f90a9d58dd7ca34adbebfcf4e">
+        <dex dex="C:\Users\Nicholas Liu\Documents\GitHub\FTC_2016-17_CV\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support-support-compat-25.0.1_158e22404b63e7f462b89e7d92b89c85379e620f\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\Nicholas Liu\Documents\GitHub\FTC_2016-17_CV\app\build\intermediates\exploded-aar\com.android.support\support-fragment\25.0.1\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.0"
+        sha1="26c6eef571592c91f29e56fda0bac73321de0c92">
+        <dex dex="C:\Users\Nicholas Liu\Documents\GitHub\FTC_2016-17_CV\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support-support-fragment-25.0.1_8abbd51ad38646e18f43ccf16d2daf08048d9f68\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\Nicholas Liu\Documents\GitHub\FTC2016-17CV\app\build\intermediates\exploded-aar\com.android.support\support-compat\25.0.1\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.0"
+        sha1="51eba4a4dd73044f90a9d58dd7ca34adbebfcf4e">
+        <dex dex="C:\Users\Nicholas Liu\Documents\GitHub\FTC2016-17CV\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support-support-compat-25.0.1_58d46f4fa16d8b7a9e2e6663b429578b149f56a3\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\Nicholas Liu\Documents\GitHub\FTC2016-17CV\app\build\intermediates\incremental-runtime-classes\debug\instant-run.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.0"
+        sha1="2d7523b532d5dfbce4f2372ad3a10277772902b4">
+        <dex dex="C:\Users\Nicholas Liu\Documents\GitHub\FTC2016-17CV\app\build\intermediates\transforms\dex\debug\folders\1000\10\instant-run_107f8d8a656493d68ac6178af986b1c63d6a732e\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\Nicholas Liu\Documents\GitHub\FTC_2016-17_CV\app\build\intermediates\exploded-aar\com.android.support\support-core-ui\25.0.1\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.0"
+        sha1="bc7e99e8d0fc279a05aa91378530f467ad62d443">
+        <dex dex="C:\Users\Nicholas Liu\Documents\GitHub\FTC_2016-17_CV\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support-support-core-ui-25.0.1_6f9dddf13f7cd74bddf1492a33e51fb373d4d5b6\classes.dex" />
     </item>
     <item
         is-multidex="true"
@@ -75,6 +237,33 @@
     </item>
     <item
         is-multidex="true"
+        jar="C:\Users\Nicholas Liu\Documents\GitHub\FTC_2016-17_CV\app\build\intermediates\exploded-aar\com.android.support\support-media-compat\25.0.1\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.0"
+        sha1="6a1479afe9f1b3645e1cd9a87318976893472818">
+        <dex dex="C:\Users\Nicholas Liu\Documents\GitHub\FTC_2016-17_CV\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support-support-media-compat-25.0.1_0b935b9106010653523a70a840f7ff9de7144724\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\Nicholas Liu\Documents\GitHub\FTC_2016-17_CV\app\build\intermediates\exploded-aar\com.android.support\support-media-compat\25.0.1\jars\libs\internal_impl-25.0.1.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.0"
+        sha1="f83b00041ecfba705603fec40363416c7de69719">
+        <dex dex="C:\Users\Nicholas Liu\Documents\GitHub\FTC_2016-17_CV\app\build\intermediates\transforms\dex\debug\folders\1000\10\internal_impl-25.0.1_c7e08b7802d25ab8b8874a1714ddce02909ff035\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\Nicholas Liu\Documents\GitHub\FTC_2016-17_CV\app\build\intermediates\exploded-aar\com.android.support\support-vector-drawable\25.0.1\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.0"
+        sha1="b24e1c688744078e1fa833ffadf696794761bbe5">
+        <dex dex="C:\Users\Nicholas Liu\Documents\GitHub\FTC_2016-17_CV\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support-support-vector-drawable-25.0.1_23860c4f627b8821da747e2ef630521235815ccb\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
         jar="C:\Users\Nicholas Liu\AppData\Local\Android\Sdk\extras\android\m2repository\com\android\support\support-annotations\25.0.1\support-annotations-25.0.1.jar"
         jumboMode="true"
         optimize="true"
@@ -93,57 +282,12 @@
     </item>
     <item
         is-multidex="true"
-        jar="C:\Users\Nicholas Liu\Documents\GitHub\FTC2016-17CV\app\build\intermediates\exploded-aar\com.android.support\support-fragment\25.0.1\jars\libs\internal_impl-25.0.1.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="25.0.0"
-        sha1="c0bd6ffb002a85b5e7cad29f8558d1cc59539679">
-        <dex dex="C:\Users\Nicholas Liu\Documents\GitHub\FTC2016-17CV\app\build\intermediates\transforms\dex\debug\folders\1000\10\internal_impl-25.0.1_3f962a1729a1c3ae1864176aa183bc9d47c577cc\classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="C:\Users\Nicholas Liu\Documents\GitHub\FTC2016-17CV\app\build\intermediates\exploded-aar\com.android.support\support-core-ui\25.0.1\jars\classes.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="25.0.0"
-        sha1="bc7e99e8d0fc279a05aa91378530f467ad62d443">
-        <dex dex="C:\Users\Nicholas Liu\Documents\GitHub\FTC2016-17CV\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support-support-core-ui-25.0.1_c27b6e46bf04a2c9c4be3f09d8158765bc22e84c\classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="C:\Users\Nicholas Liu\Documents\GitHub\FTC2016-17CV\app\build\intermediates\exploded-aar\com.android.support\support-compat\25.0.1\jars\classes.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="25.0.0"
-        sha1="51eba4a4dd73044f90a9d58dd7ca34adbebfcf4e">
-        <dex dex="C:\Users\Nicholas Liu\Documents\GitHub\FTC2016-17CV\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support-support-compat-25.0.1_58d46f4fa16d8b7a9e2e6663b429578b149f56a3\classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="C:\Users\Nicholas Liu\Documents\GitHub\FTC2016-17CV\app\build\intermediates\exploded-aar\com.android.support\support-compat\25.0.1\jars\libs\internal_impl-25.0.1.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="25.0.0"
-        sha1="3af8cc51ef7088e56f132780da8c0bd858b6a6ad">
-        <dex dex="C:\Users\Nicholas Liu\Documents\GitHub\FTC2016-17CV\app\build\intermediates\transforms\dex\debug\folders\1000\10\internal_impl-25.0.1_4585e2c113fff598178a43d2217ef5e16871a70b\classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="C:\Users\Nicholas Liu\Documents\GitHub\FTC2016-17CV\app\build\intermediates\incremental-runtime-classes\debug\instant-run.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="25.0.0"
-        sha1="2d7523b532d5dfbce4f2372ad3a10277772902b4">
-        <dex dex="C:\Users\Nicholas Liu\Documents\GitHub\FTC2016-17CV\app\build\intermediates\transforms\dex\debug\folders\1000\10\instant-run_107f8d8a656493d68ac6178af986b1c63d6a732e\classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="C:\Users\Nicholas Liu\Documents\GitHub\FTC2016-17CV\app\build\intermediates\exploded-aar\com.android.support\support-core-ui\25.0.1\jars\libs\internal_impl-25.0.1.jar"
+        jar="C:\Users\Nicholas Liu\Documents\GitHub\FTC_2016-17_CV\app\build\intermediates\exploded-aar\com.android.support\support-core-ui\25.0.1\jars\libs\internal_impl-25.0.1.jar"
         jumboMode="true"
         optimize="true"
         revision="25.0.0"
         sha1="e5343c9d19cb19ff55f6b268c7f3fe8c9d224f6f">
-        <dex dex="C:\Users\Nicholas Liu\Documents\GitHub\FTC2016-17CV\app\build\intermediates\transforms\dex\debug\folders\1000\10\internal_impl-25.0.1_96e798542722f682d95d155b5e81cc9df2f34f46\classes.dex" />
+        <dex dex="C:\Users\Nicholas Liu\Documents\GitHub\FTC_2016-17_CV\app\build\intermediates\transforms\dex\debug\folders\1000\10\internal_impl-25.0.1_6c56458014316375160340980a45b566d191da11\classes.dex" />
     </item>
     <item
         is-multidex="true"

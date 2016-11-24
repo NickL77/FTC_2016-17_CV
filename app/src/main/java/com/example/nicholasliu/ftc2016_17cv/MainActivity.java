@@ -1,162 +1,186 @@
 package com.example.nicholasliu.ftc2016_17cv;
 
-import android.Manifest;
-import android.content.Context;
-import android.content.pm.PackageManager;
-import android.graphics.SurfaceTexture;
-import android.hardware.camera2.*;
-import android.hardware.camera2.params.StreamConfigurationMap;
-import android.os.Handler;
-import android.os.HandlerThread;
-import android.support.annotation.NonNull;
-import android.support.v4.app.ActivityCompat;
-import android.support.v7.app.AppCompatActivity;
+import org.opencv.android.BaseLoaderCallback;
+import org.opencv.android.CameraBridgeViewBase.CvCameraViewFrame;
+import org.opencv.android.LoaderCallbackInterface;
+import org.opencv.android.OpenCVLoader;
+import org.opencv.core.Core;
+import org.opencv.core.Mat;
+import org.opencv.android.CameraBridgeViewBase;
+import org.opencv.android.CameraBridgeViewBase.CvCameraViewListener2;
+import org.opencv.core.MatOfPoint;
+import org.opencv.core.MatOfPoint2f;
+import org.opencv.core.Point;
+import org.opencv.core.RotatedRect;
+import org.opencv.core.Scalar;
+import org.opencv.imgproc.Imgproc;
+
+import android.app.Activity;
 import android.os.Bundle;
 import android.util.Log;
-import android.util.Size;
-import android.view.Surface;
-import android.view.TextureView;
-import android.graphics.SurfaceTexture;
-import android.widget.Toast;
-import android.hardware.camera2.CameraCaptureSession;
+import android.view.SurfaceView;
+import android.view.WindowManager;
 
-import java.util.Arrays;
+import java.util.ArrayList;
+import java.util.List;
 
-public class MainActivity extends AppCompatActivity {
+//TODO: Create a method for finding slope of detected rectangle and calculate angle
+//TODO: Find a way to calculate translational movement needed to center onto line
+//TODO: See if there is a way to rotate the view of the JavaCamera
+//TODO: Add Dropdown Menu for viewing different filters(HSV, Mask, etc.)
 
-    TextureView preview;
+public class MainActivity extends Activity implements CvCameraViewListener2 {
+    private static final String TAG = "FTC_CV::Activity";
 
-    private String cameraId;
-    private Size imageDimension;
-    private Handler mBackgroundHandler;
-    private HandlerThread mBackgroundThread;
-    protected CameraDevice cameraDevice;
-    protected CameraCaptureSession cameraCaptureSessions;
-    protected CaptureRequest.Builder captureRequestBuilder;
+    private CameraBridgeViewBase mOpenCvCameraView;
 
-    private static final int REQUEST_CAMERA_PERMISSION = 200;
+    private Scalar mLowerBound = new Scalar(0, 0, 170);
+    private Scalar mUpperBound = new Scalar(255, 80, 255);
 
+    private Mat mPyrDownMat, mHsvMat, mMask, mDilatedMask, mHierarchy;
+
+    private List<MatOfPoint> contours = new ArrayList<>();
+    private List<MatOfPoint> mContours = new ArrayList<>();
+
+    RotatedRect rectCont;
+    private Point[] vertices = new Point[4];
+
+    int contourIndex = -1;
+    double maxArea = 0, area;
+
+    private BaseLoaderCallback mLoaderCallback = new BaseLoaderCallback(this) {
+        @Override
+        public void onManagerConnected(int status) {
+            switch (status) {
+                case LoaderCallbackInterface.SUCCESS:
+                {
+                    Log.i(TAG, "OpenCV loaded successfully");
+                    mPyrDownMat = new Mat();
+                    mHsvMat = new Mat();
+                    mMask = new Mat();
+                    mDilatedMask = new Mat();
+                    mHierarchy = new Mat();
+                    mOpenCvCameraView.enableView();
+                } break;
+                default:
+                {
+                    super.onManagerConnected(status);
+                } break;
+            }
+        }
+    };
+
+    /** Called when the activity is first created. */
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    public void onCreate(Bundle savedInstanceState) {
+        Log.i(TAG, "called onCreate");
         super.onCreate(savedInstanceState);
+        getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
+
         setContentView(R.layout.activity_main);
 
-        preview = (TextureView) findViewById(R.id.preview);
-        preview.setSurfaceTextureListener(textureListener);
+        mOpenCvCameraView = (CameraBridgeViewBase) findViewById(R.id.preview);
+
+        mOpenCvCameraView.setVisibility(SurfaceView.VISIBLE);
+
+        mOpenCvCameraView.setCvCameraViewListener(this);
     }
 
-
-    TextureView.SurfaceTextureListener textureListener = new TextureView.SurfaceTextureListener() {
-        @Override
-        public void onSurfaceTextureAvailable(SurfaceTexture surface, int width, int height) {
-            //open your camera here
-            openCamera();
-        }
-        @Override
-        public void onSurfaceTextureSizeChanged(SurfaceTexture surface, int width, int height) {
-            // Transform you image captured size according to the surface width and height
-        }
-        @Override
-        public boolean onSurfaceTextureDestroyed(SurfaceTexture surface) {
-            return false;
-        }
-        @Override
-        public void onSurfaceTextureUpdated(SurfaceTexture surface) {
-        }
-
-    };
-    private final CameraDevice.StateCallback stateCallback = new CameraDevice.StateCallback() {
-        @Override
-        public void onOpened(CameraDevice camera) {
-            //This is called when the camera is open
-            //Log.e(TAG, "onOpened");
-            cameraDevice = camera;
-            createCameraPreview();
-        }
-        @Override
-        public void onDisconnected(CameraDevice camera) {
-            cameraDevice.close();
-        }
-        @Override
-        public void onError(CameraDevice camera, int error) {
-            cameraDevice.close();
-            cameraDevice = null;
-        }
-    };
-    protected void startBackgroundThread() {
-        mBackgroundThread = new HandlerThread("Camera Background");
-        mBackgroundThread.start();
-        mBackgroundHandler = new Handler(mBackgroundThread.getLooper());
+    @Override
+    public void onPause()
+    {
+        super.onPause();
+        if (mOpenCvCameraView != null)
+            mOpenCvCameraView.disableView();
     }
-    protected void stopBackgroundThread() {
-        mBackgroundThread.quitSafely();
-        try {
-            mBackgroundThread.join();
-            mBackgroundThread = null;
-            mBackgroundHandler = null;
-        } catch (InterruptedException e) {
-            e.printStackTrace();
+
+    @Override
+    public void onResume()
+    {
+        super.onResume();
+        if (!OpenCVLoader.initDebug()) {
+            Log.d(TAG, "Internal OpenCV library not found. Using OpenCV Manager for initialization");
+            OpenCVLoader.initAsync(OpenCVLoader.OPENCV_VERSION_3_0_0, this, mLoaderCallback);
+        } else {
+            Log.d(TAG, "OpenCV library found inside package. Using it!");
+            mLoaderCallback.onManagerConnected(LoaderCallbackInterface.SUCCESS);
         }
     }
 
-    private void openCamera() {
-        CameraManager manager = (CameraManager) getSystemService(Context.CAMERA_SERVICE);
-        //Log.e(TAG, "is camera open");
-        try {
-            cameraId = manager.getCameraIdList()[0];
-            CameraCharacteristics characteristics = manager.getCameraCharacteristics(cameraId);
-            StreamConfigurationMap map = characteristics.get(CameraCharacteristics.SCALER_STREAM_CONFIGURATION_MAP);
-            assert map != null;
-            imageDimension = map.getOutputSizes(SurfaceTexture.class)[0];
-            // Add permission for camera and let user grant the permission
-            if (ActivityCompat.checkSelfPermission(this, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
-                ActivityCompat.requestPermissions(MainActivity.this, new String[]{Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE}, REQUEST_CAMERA_PERMISSION);
-                return;
+    public void onDestroy() {
+        super.onDestroy();
+        if (mOpenCvCameraView != null)
+            mOpenCvCameraView.disableView();
+    }
+
+    public void onCameraViewStarted(int width, int height) {
+    }
+
+    public void onCameraViewStopped() {
+    }
+
+    public Mat onCameraFrame(CvCameraViewFrame inputFrame) {
+        //cDetector.process(inputFrame.rgba());
+        return process(inputFrame.rgba());
+        //return inputFrame.rgba();
+    }
+    public Mat process (Mat rgbaFrame){
+        //TODO: Should size down frame for faster processing...
+        //TODO: Need to figure out how to scale up contours and lines
+        /*
+        Imgproc.pyrDown(rgbaFrame, mPyrDownMat);
+        Imgproc.pyrDown(mPyrDownMat, mPyrDownMat);
+        Imgproc.cvtColor(mPyrDownMat, mHsvMat, Imgproc.COLOR_RGB2HSV_FULL);
+        */
+
+        //Convert to HSV
+        Imgproc.cvtColor(rgbaFrame, mHsvMat, Imgproc.COLOR_RGB2HSV_FULL);
+
+        //Filter by HSV Values
+        Core.inRange(mHsvMat, mLowerBound, mUpperBound, mMask);
+        //TODO: Figure out what this does
+        Imgproc.dilate(mMask, mDilatedMask, new Mat());
+
+        //clear variables for search
+        maxArea = 0;
+        contours.clear();
+        mContours.clear();
+
+        //find Contours
+        Imgproc.findContours(mDilatedMask, contours, mHierarchy, Imgproc.RETR_EXTERNAL, Imgproc.CHAIN_APPROX_SIMPLE);
+
+        //LOOP THROUGH ALL CONTOURS
+        //filter out small contours & record largest
+        for (int i = 0; i < contours.size(); i++){
+            area = Imgproc.contourArea(contours.get(i));
+            if (area > 400){
+                if (area > maxArea) {
+                    maxArea = area;
+                    contourIndex = i;
+                }
+                mContours.add(contours.get(i));
             }
-            manager.openCamera(cameraId, stateCallback, null);
-        } catch (CameraAccessException e) {
-            e.printStackTrace();
         }
-        //Log.e(TAG, "openCamera X");
+
+        //check if contours were found & find verticies/bounding rectangle of largest found contour
+        if (contours.size() > 0) {
+            rectCont = Imgproc.minAreaRect(new MatOfPoint2f(contours.get(contourIndex).toArray()));
+
+            rectCont.points(vertices);
+            for (int j = 0; j < 4; j++) {
+                Imgproc.line(rgbaFrame, vertices[j], vertices[(j + 1) % 4], new Scalar(255, 0, 0), 5);
+            }
+        }
+
+        //draw all large enough contours
+        Imgproc.drawContours (rgbaFrame, mContours, -1, new Scalar(120,255,100), 5);
+
+        //print out area of largest contour for finding size filter
+        Imgproc.putText(rgbaFrame, "Area: " + String.valueOf(maxArea), new Point(0,30), 0, 0.5, new Scalar(255, 0, 0));
+
+        return rgbaFrame;
+
     }
-    protected void createCameraPreview() {
-        try {
-            SurfaceTexture texture = preview.getSurfaceTexture();
-            assert texture != null;
-            texture.setDefaultBufferSize(imageDimension.getWidth(), imageDimension.getHeight());
-            Surface surface = new Surface(texture);
-            captureRequestBuilder = cameraDevice.createCaptureRequest(CameraDevice.TEMPLATE_PREVIEW);
-            captureRequestBuilder.addTarget(surface);
-            cameraDevice.createCaptureSession(Arrays.asList(surface), new CameraCaptureSession.StateCallback(){
-                @Override
-                public void onConfigured(@NonNull CameraCaptureSession cameraCaptureSession) {
-                    //The camera is already closed
-                    if (null == cameraDevice) {
-                        return;
-                    }
-                    // When the session is ready, we start displaying the preview.
-                    cameraCaptureSessions = cameraCaptureSession;
-                    updatePreview();
-                }
-                @Override
-                public void onConfigureFailed(@NonNull CameraCaptureSession cameraCaptureSession) {
-                    Toast.makeText(MainActivity.this, "Configuration change", Toast.LENGTH_SHORT).show();
-                }
-            }, null);
-        } catch (CameraAccessException e) {
-            e.printStackTrace();
-        }
-    }
-    protected void updatePreview() {
-        if(null == cameraDevice) {
-            //Log.e(TAG, "updatePreview error, return");
-        }
-        captureRequestBuilder.set(CaptureRequest.CONTROL_MODE, CameraMetadata.CONTROL_MODE_AUTO);
-        try {
-            cameraCaptureSessions.setRepeatingRequest(captureRequestBuilder.build(), null, mBackgroundHandler);
-        } catch (CameraAccessException e) {
-            e.printStackTrace();
-        }
-    }
+
 
 }
