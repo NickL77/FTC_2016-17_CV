@@ -24,7 +24,6 @@ import android.view.WindowManager;
 import java.util.ArrayList;
 import java.util.List;
 
-//TODO: Create a method for finding slope of detected rectangle and calculate angle
 //TODO: Find a way to calculate translational movement needed to center onto line
 //TODO: See if there is a way to rotate the view of the JavaCamera
 //TODO: Add Dropdown Menu for viewing different filters(HSV, Mask, etc.)
@@ -34,7 +33,7 @@ public class MainActivity extends Activity implements CvCameraViewListener2 {
 
     private CameraBridgeViewBase mOpenCvCameraView;
 
-    private Scalar mLowerBound = new Scalar(0, 0, 170);
+    private Scalar mLowerBound = new Scalar(0, 0, 200);
     private Scalar mUpperBound = new Scalar(255, 80, 255);
 
     private Mat mPyrDownMat, mHsvMat, mMask, mDilatedMask, mHierarchy;
@@ -47,6 +46,7 @@ public class MainActivity extends Activity implements CvCameraViewListener2 {
 
     int contourIndex = -1;
     double maxArea = 0, area;
+    double lineLength, maxLength, deltaX, deltaY, longestX, longestY, lineIndex;
 
     private BaseLoaderCallback mLoaderCallback = new BaseLoaderCallback(this) {
         @Override
@@ -145,6 +145,7 @@ public class MainActivity extends Activity implements CvCameraViewListener2 {
         maxArea = 0;
         contours.clear();
         mContours.clear();
+        contourIndex = -1;
 
         //find Contours
         Imgproc.findContours(mDilatedMask, contours, mHierarchy, Imgproc.RETR_EXTERNAL, Imgproc.CHAIN_APPROX_SIMPLE);
@@ -162,13 +163,18 @@ public class MainActivity extends Activity implements CvCameraViewListener2 {
             }
         }
 
-        //check if contours were found & find verticies/bounding rectangle of largest found contour
-        if (contours.size() > 0) {
+        //check if an acceptable contour was found
+        if (contourIndex > -1) {
             rectCont = Imgproc.minAreaRect(new MatOfPoint2f(contours.get(contourIndex).toArray()));
 
             rectCont.points(vertices);
+            Imgproc.putText(rgbaFrame, "Angle: " + String.valueOf(findAngle(vertices)), new Point(0,45), 0, 0.5, new Scalar(255, 0, 0));
+
             for (int j = 0; j < 4; j++) {
-                Imgproc.line(rgbaFrame, vertices[j], vertices[(j + 1) % 4], new Scalar(255, 0, 0), 5);
+                if (j == lineIndex)
+                    Imgproc.line(rgbaFrame, vertices[j], vertices[(j + 1) % 4], new Scalar(0, 0, 255), 5);
+                else
+                    Imgproc.line(rgbaFrame, vertices[j], vertices[(j + 1) % 4], new Scalar(255, 0, 0), 5);
             }
         }
 
@@ -180,6 +186,22 @@ public class MainActivity extends Activity implements CvCameraViewListener2 {
 
         return rgbaFrame;
 
+    }
+
+    public double findAngle(Point [] corners){
+        maxLength = 0;
+        for (int i = 0; i < 4; i++){
+            deltaX = (corners[i].x - corners[(i+1) % 4].x);
+            deltaY = (corners[i].y - corners[(i+1) % 4].y);
+            lineLength = Math.sqrt((deltaX*deltaX) + (deltaY*deltaY));
+            if (lineLength > maxLength){
+                lineLength = maxLength;
+                longestX = deltaX;
+                longestY = deltaY;
+                lineIndex = i;
+            }
+        }
+        return  Math.atan(longestX/longestY)*180/Math.PI;
     }
 
 
