@@ -74,6 +74,10 @@ public class JavaCameraView extends CameraBridgeViewBase implements PreviewCallb
                 Log.d(TAG, "Trying to open camera with old open()");
                 try {
                     mCamera = Camera.open();
+                    //TODO: THINGS
+                    //Camera.Parameters p = mCamera.getParameters();
+                    //p.setFlashMode(Camera.Parameters.FLASH_MODE_TORCH);
+                    //mCamera.setParameters(p);
                 }
                 catch (Exception e){
                     Log.e(TAG, "Camera is not available (in use or does not exist): " + e.getLocalizedMessage());
@@ -137,6 +141,7 @@ public class JavaCameraView extends CameraBridgeViewBase implements PreviewCallb
             /* Now set camera parameters */
             try {
                 Camera.Parameters params = mCamera.getParameters();
+                params.setFlashMode(Camera.Parameters.FLASH_MODE_TORCH);
                 Log.d(TAG, "getSupportedPreviewSizes()");
                 List<android.hardware.Camera.Size> sizes = params.getSupportedPreviewSizes();
 

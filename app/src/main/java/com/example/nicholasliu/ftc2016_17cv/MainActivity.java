@@ -2,6 +2,7 @@ package com.example.nicholasliu.ftc2016_17cv;
 
 import org.opencv.android.BaseLoaderCallback;
 import org.opencv.android.CameraBridgeViewBase.CvCameraViewFrame;
+import org.opencv.android.JavaCameraView;
 import org.opencv.android.LoaderCallbackInterface;
 import org.opencv.android.OpenCVLoader;
 import org.opencv.core.Core;
@@ -31,7 +32,7 @@ import java.util.List;
 public class MainActivity extends Activity implements CvCameraViewListener2 {
     private static final String TAG = "FTC_CV::Activity";
 
-    private CameraBridgeViewBase mOpenCvCameraView;
+    private JavaCameraView mOpenCvCameraView;
 
     private Scalar mLowerBound = new Scalar(0, 0, 200);
     private Scalar mUpperBound = new Scalar(255, 80, 255);
@@ -79,7 +80,7 @@ public class MainActivity extends Activity implements CvCameraViewListener2 {
 
         setContentView(R.layout.activity_main);
 
-        mOpenCvCameraView = (CameraBridgeViewBase) findViewById(R.id.preview);
+        mOpenCvCameraView = (JavaCameraView) findViewById(R.id.preview);
 
         mOpenCvCameraView.setVisibility(SurfaceView.VISIBLE);
 
@@ -138,7 +139,7 @@ public class MainActivity extends Activity implements CvCameraViewListener2 {
 
         //Filter by HSV Values
         Core.inRange(mHsvMat, mLowerBound, mUpperBound, mMask);
-        //TODO: Figure out what this does
+        //TODO: Figure out what this
         Imgproc.dilate(mMask, mDilatedMask, new Mat());
 
         //clear variables for search
@@ -171,8 +172,10 @@ public class MainActivity extends Activity implements CvCameraViewListener2 {
             Imgproc.putText(rgbaFrame, "Angle: " + String.valueOf(findAngle(vertices)), new Point(0,45), 0, 0.5, new Scalar(255, 0, 0));
 
             for (int j = 0; j < 4; j++) {
+                Imgproc.putText(rgbaFrame, "Line" + j + ": " + getLineLength(vertices[j],vertices[(j + 1) % 4] ), new Point(0,60 + (j*15)), 0, 0.5, new Scalar(255, 0, 0));
+                Imgproc.putText(rgbaFrame, Integer.toString(j) ,vertices[j], 0, 3, new Scalar(255, 255, 255));
                 if (j == lineIndex)
-                    Imgproc.line(rgbaFrame, vertices[j], vertices[(j + 1) % 4], new Scalar(0, 0, 255), 5);
+                    Imgproc.line(rgbaFrame, vertices[j], vertices[(j + 1) % 4], new Scalar(0, 0, 255), 10);
                 else
                     Imgproc.line(rgbaFrame, vertices[j], vertices[(j + 1) % 4], new Scalar(255, 0, 0), 5);
             }
@@ -191,17 +194,29 @@ public class MainActivity extends Activity implements CvCameraViewListener2 {
     public double findAngle(Point [] corners){
         maxLength = 0;
         for (int i = 0; i < 4; i++){
+            //TODO: reimplement after completing getLineLength
             deltaX = (corners[i].x - corners[(i+1) % 4].x);
             deltaY = (corners[i].y - corners[(i+1) % 4].y);
             lineLength = Math.sqrt((deltaX*deltaX) + (deltaY*deltaY));
-            if (lineLength > maxLength){
-                lineLength = maxLength;
+            if (lineLength > maxLength){ //goes by longest line
+
+            //if (getLineLength(corners[i],corners[(i+1) % 4] ) > maxLength){ //goes by longest line
+                maxLength = lineLength;
+                //maxLength = getLineLength(corners[i],corners[(i+1) % 4]);
                 longestX = deltaX;
                 longestY = deltaY;
                 lineIndex = i;
             }
         }
         return  Math.atan(longestX/longestY)*180/Math.PI;
+    }
+    //TODO: temp method for printing out line length
+    // Go back to commented in findAngle to continue calculating angle value
+    public double getLineLength (Point pt1, Point pt2){
+        deltaX = Math.abs(pt1.x - pt2.x);
+        deltaY = Math.abs(pt1.y - pt2.y);
+        lineLength = Math.sqrt((deltaX*deltaX) + (deltaY*deltaY));
+        return lineLength;
     }
 
 
